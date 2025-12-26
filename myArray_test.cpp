@@ -4,7 +4,7 @@
 int main() {
   
   /*myArray class test cases*/  
-  cout << "Test 1 - Intialize a myArray with dobule values" << endl;
+  cout << "Test 1 - Initialize a myArray with double values" << endl;
 
   int arraySize = 7;
   myArray<7, double> myArray_test = {3.1, 0, 1.1, 2 ,3, 0, 0};
