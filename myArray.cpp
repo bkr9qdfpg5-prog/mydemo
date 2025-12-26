@@ -44,7 +44,8 @@ myArray<N, T>::myArray() : data{} {
 template <int N, typename T>
 myArray<N,T>::myArray(initializer_list<T> l) : data{} {
   int i = 0;
-  for(T t : l) {
+  for(const T& t : l) {
+      if (i >= N) break;
       data[i++] = t;
   }
 }
