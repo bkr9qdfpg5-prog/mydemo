@@ -1,0 +1,5 @@
+# Compiled binaries
+myArray_test
+*.o
+*.out
+a.out
