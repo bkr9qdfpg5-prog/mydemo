@@ -18,11 +18,13 @@ class myArray {
 
 template <int N, typename T>
 T* begin(myArray<N,T>& a) {
+    if (N == 0) return nullptr;
     return &a[0];
 }
 
 template <int N, typename T>
 T* end(myArray<N,T>& a) {
+    if (N == 0) return nullptr;
     return &a[N];
 }
 
