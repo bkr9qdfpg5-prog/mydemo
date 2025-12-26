@@ -38,14 +38,11 @@ operator<<(ostream& os, const myArray<N, T>& a) {
 
 
 template <int N, typename T>
-myArray<N, T>::myArray() {
-    for (T& v : data) {
-        v = T();
-    }
+myArray<N, T>::myArray() : data{} {
 }
 
 template <int N, typename T>
-myArray<N,T>::myArray(initializer_list<T> l) {
+myArray<N,T>::myArray(initializer_list<T> l) : data{} {
   int i = 0;
   for(T t : l) {
       data[i++] = t;
