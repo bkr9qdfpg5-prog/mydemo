@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.body.classList.remove('dark-mode');
             try {
-                localStorage.setItem('darkMode', 'disabled');
+                localStorage.removeItem('darkMode');
             } catch (e) {
                 console.warn('Failed to save dark mode preference:', e);
             }
