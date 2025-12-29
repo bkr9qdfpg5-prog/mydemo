@@ -190,9 +190,17 @@ void test_const_iterators() {
     cout << "Test: const iterators..." << endl;
     const myArray<3, int> arr = {1, 2, 3};
     
+    // Test with raw pointers
     int sum = 0;
     for (const int* it = begin(arr); it != end(arr); ++it) {
         sum += *it;
+    }
+    assert(sum == 6);
+    
+    // Test with range-based for loop
+    sum = 0;
+    for (const int& val : arr) {
+        sum += val;
     }
     assert(sum == 6);
     

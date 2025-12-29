@@ -1,6 +1,7 @@
 /* Ken Lin (ken.lin@capgemini.com)> */
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 using namespace std;
 
 template <int N, typename T>
@@ -204,9 +205,7 @@ void myArray<N, T>::fill(const T& value) {
 template <int N, typename T>
 void myArray<N, T>::swap(myArray<N, T>& other) {
   for (int i = 0; i < N; i++) {
-    T temp = m_data[i];
-    m_data[i] = other.m_data[i];
-    other.m_data[i] = temp;
+    std::swap(m_data[i], other.m_data[i]);
   }
 }
 
