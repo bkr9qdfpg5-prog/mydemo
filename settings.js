@@ -2,8 +2,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     
+    // Guard clause: ensure element exists
+    if (!darkModeToggle) return;
+    
     // Check for saved dark mode preference
-    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    let isDarkMode = false;
+    try {
+        isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    } catch (e) {
+        // localStorage may throw in private browsing mode
+        console.warn('localStorage not available:', e);
+    }
     
     // Apply saved preference
     if (isDarkMode) {
@@ -15,10 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
     darkModeToggle.addEventListener('change', function() {
         if (this.checked) {
             document.body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
+            try {
+                localStorage.setItem('darkMode', 'enabled');
+            } catch (e) {
+                console.warn('Failed to save dark mode preference:', e);
+            }
         } else {
             document.body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
+            try {
+                localStorage.setItem('darkMode', 'disabled');
+            } catch (e) {
+                console.warn('Failed to save dark mode preference:', e);
+            }
         }
     });
 });
