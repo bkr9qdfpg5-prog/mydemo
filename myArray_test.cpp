@@ -78,6 +78,118 @@ void test_const_bounds_checking() {
     cout << "  PASS: Const operator[] bounds checking works" << endl;
 }
 
+// ===== New Test Cases for Built-in Data Types =====
+
+void test_char_type() {
+    cout << "Test: char data type..." << endl;
+    myArray<5, char> arr = {'H', 'e', 'l', 'l', 'o'};
+    
+    assert(arr[0] == 'H');
+    assert(arr[1] == 'e');
+    assert(arr[4] == 'o');
+    assert(arr.Size() == 5);
+    
+    arr[1] = 'a';
+    assert(arr[1] == 'a');
+    
+    cout << "  PASS: char type works correctly, array = " << arr << endl;
+}
+
+void test_bool_type() {
+    cout << "Test: bool data type..." << endl;
+    myArray<4, bool> arr = {true, false, true, false};
+    
+    assert(arr[0] == true);
+    assert(arr[1] == false);
+    assert(arr[2] == true);
+    assert(arr[3] == false);
+    assert(arr.Size() == 4);
+    
+    arr[1] = true;
+    assert(arr[1] == true);
+    
+    cout << "  PASS: bool type works correctly, array = " << arr << endl;
+}
+
+void test_float_type() {
+    cout << "Test: float data type..." << endl;
+    myArray<4, float> arr = {1.5f, 2.7f, 3.14f, 4.0f};
+    
+    assert(arr[0] == 1.5f);
+    assert(arr[1] == 2.7f);
+    assert(arr[2] == 3.14f);
+    assert(arr.Size() == 4);
+    
+    arr[3] = 5.5f;
+    assert(arr[3] == 5.5f);
+    
+    cout << "  PASS: float type works correctly, array = " << arr << endl;
+}
+
+void test_long_type() {
+    cout << "Test: long data type..." << endl;
+    myArray<5, long> arr = {100L, 200L, 300L, 400L, 500L};
+    
+    assert(arr[0] == 100L);
+    assert(arr[2] == 300L);
+    assert(arr[4] == 500L);
+    assert(arr.Size() == 5);
+    
+    arr[2] = 999L;
+    assert(arr[2] == 999L);
+    
+    cout << "  PASS: long type works correctly, array = " << arr << endl;
+}
+
+// ===== Self-defined Class for Testing =====
+
+class Point {
+  public:
+    int x, y;
+    
+    Point() : x(0), y(0) {}
+    Point(int x_val, int y_val) : x(x_val), y(y_val) {}
+    
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
+    
+    friend ostream& operator<<(ostream& os, const Point& p) {
+        os << "(" << p.x << "," << p.y << ")";
+        return os;
+    }
+};
+
+void test_custom_class() {
+    cout << "Test: Custom class (Point)..." << endl;
+    myArray<3, Point> arr = {Point(1, 2), Point(3, 4), Point(5, 6)};
+    
+    assert(arr[0] == Point(1, 2));
+    assert(arr[1] == Point(3, 4));
+    assert(arr[2] == Point(5, 6));
+    assert(arr.Size() == 3);
+    
+    arr[1] = Point(10, 20);
+    assert(arr[1] == Point(10, 20));
+    
+    cout << "  PASS: Custom class works correctly, array = " << arr << endl;
+}
+
+void test_custom_class_default_initialization() {
+    cout << "Test: Custom class default initialization..." << endl;
+    myArray<4, Point> arr = {Point(1, 1), Point(2, 2)};
+    
+    // First two elements should be initialized with provided values
+    assert(arr[0] == Point(1, 1));
+    assert(arr[1] == Point(2, 2));
+    
+    // Remaining elements should be default-initialized
+    assert(arr[2] == Point(0, 0));
+    assert(arr[3] == Point(0, 0));
+    
+    cout << "  PASS: Custom class default initialization works, array = " << arr << endl;
+}
+
 int main() {
   
   /*myArray class test cases*/  
@@ -98,6 +210,18 @@ int main() {
   test_bounds_checking();
   test_empty_array();
   test_const_bounds_checking();
+  
+  cout << endl << "=== Running Built-in Data Type Tests ===" << endl << endl;
+  
+  test_char_type();
+  test_bool_type();
+  test_float_type();
+  test_long_type();
+  
+  cout << endl << "=== Running Custom Class Tests ===" << endl << endl;
+  
+  test_custom_class();
+  test_custom_class_default_initialization();
   
   cout << endl << "=== All Tests Passed! ===" << endl;
   return 0;
