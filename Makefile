@@ -25,7 +25,7 @@ $(TARGET): $(SOURCES) $(HEADERS)
 
 # Build with debug symbols
 debug: CXXFLAGS += $(DEBUG_FLAGS)
-debug: clean $(TARGET)
+debug: $(TARGET)
 
 # Run tests
 test: $(TARGET)
