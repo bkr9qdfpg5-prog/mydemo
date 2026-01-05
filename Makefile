@@ -24,6 +24,7 @@ $(TARGET): $(SOURCES) $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SOURCES)
 
 # Build with debug symbols
+# Note: Target-specific variable assignment only affects this target
 debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: $(TARGET)
 
